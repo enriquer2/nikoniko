@@ -21,6 +21,7 @@ group :development do
   gem 'rubocop', '~> 0.48.1', require: false
   gem 'rubocop-rspec'
   gem 'shoulda-matchers', require: false
+  gem "rubycritic", require: false
 end
 
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
