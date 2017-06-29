@@ -1,5 +1,5 @@
 class FeelingsController < ApplicationController
-  before_action :set_feeling, only: [:show, :edit, :update, :destroy]
+  before_action :set_feeling, only: %i[show edit update destroy]
 
   # GET /feelings
   # GET /feelings.json
@@ -9,8 +9,7 @@ class FeelingsController < ApplicationController
 
   # GET /feelings/1
   # GET /feelings/1.json
-  def show
-  end
+  def show; end
 
   # GET /feelings/new
   def new
@@ -18,8 +17,7 @@ class FeelingsController < ApplicationController
   end
 
   # GET /feelings/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /feelings
   # POST /feelings.json
@@ -62,13 +60,14 @@ class FeelingsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_feeling
-      @feeling = Feeling.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def feeling_params
-      params.require(:feeling).permit(:day, :status, :user_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_feeling
+    @feeling = Feeling.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def feeling_params
+    params.require(:feeling).permit(:day, :status, :user_id)
+  end
 end

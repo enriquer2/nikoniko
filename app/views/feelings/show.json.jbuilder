@@ -1,1 +1,1 @@
-json.partial! "feelings/feeling", feeling: @feeling
+json.partial! 'feelings/feeling', feeling: @feeling
