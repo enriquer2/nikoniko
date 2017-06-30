@@ -10,37 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170629092607) do
-
+ActiveRecord::Schema.define(version: 20_170_629_092_607) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  enable_extension 'plpgsql'
 
-  create_table "feelings", force: :cascade do |t|
-    t.date "day"
-    t.integer "status"
-    t.bigint "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_feelings_on_user_id"
+  create_table 'feelings', force: :cascade do |t|
+    t.date 'day'
+    t.integer 'status'
+    t.bigint 'user_id'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['user_id'], name: 'index_feelings_on_user_id'
   end
 
-  create_table "teams", force: :cascade do |t|
-    t.string "name"
-    t.bigint "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_teams_on_user_id"
+  create_table 'teams', force: :cascade do |t|
+    t.string 'name'
+    t.bigint 'user_id'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['user_id'], name: 'index_teams_on_user_id'
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string "name"
-    t.string "lastname"
-    t.string "email"
-    t.integer "role"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table 'users', force: :cascade do |t|
+    t.string 'name'
+    t.string 'lastname'
+    t.string 'email'
+    t.integer 'role'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
   end
 
-  add_foreign_key "feelings", "users"
-  add_foreign_key "teams", "users"
+  add_foreign_key 'feelings', 'users'
+  add_foreign_key 'teams', 'users'
 end
