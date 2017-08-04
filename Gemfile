@@ -23,7 +23,7 @@ group :development do
   gem 'rubocop', '~> 0.48.1', require: false
   gem 'rubocop-rspec'
   gem 'rubycritic', require: false
-  gem 'shoulda-matchers', require: false
+  gem 'shoulda-matchers', git: 'https://github.com/thoughtbot/shoulda-matchers.git', branch: 'rails-5'
 end
 
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
