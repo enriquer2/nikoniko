@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'coffee-rails', '~> 4.2'
+gem 'devise'
 gem 'gemrat'
 gem 'jbuilder', '~> 2.5'
 gem 'pg'
