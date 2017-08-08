@@ -10,3 +10,10 @@ describe User do
     expect(user.role).to eq('employee')
   end
 end
+
+describe User do
+  it "Should have role 3 as default" do
+    user = User.new
+    expect(user.role).to eq(3)
+  end
+end
