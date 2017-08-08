@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -13,23 +15,23 @@
 ActiveRecord::Schema.define(version: 20170818093954) do
 
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  enable_extension 'plpgsql'
 
-  create_table "feelings", force: :cascade do |t|
-    t.date "day"
-    t.integer "status"
-    t.bigint "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_feelings_on_user_id"
+  create_table 'feelings', force: :cascade do |t|
+    t.date 'day'
+    t.integer 'status'
+    t.bigint 'user_id'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['user_id'], name: 'index_feelings_on_user_id'
   end
 
-  create_table "teams", force: :cascade do |t|
-    t.string "name"
-    t.bigint "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_teams_on_user_id"
+  create_table 'teams', force: :cascade do |t|
+    t.string 'name'
+    t.bigint 'user_id'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['user_id'], name: 'index_teams_on_user_id'
   end
 
   create_table "users", force: :cascade do |t|
@@ -53,6 +55,6 @@ ActiveRecord::Schema.define(version: 20170818093954) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "feelings", "users"
-  add_foreign_key "teams", "users"
+  add_foreign_key 'feelings', 'users'
+  add_foreign_key 'teams', 'users'
 end
