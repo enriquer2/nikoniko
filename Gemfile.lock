@@ -101,6 +101,9 @@ GEM
       path_expander (~> 1.0)
       ruby_parser (~> 3.1, > 3.1.0)
       sexp_processor (~> 4.8)
+    fuubar (2.2.0)
+      rspec-core (~> 3.0)
+      ruby-progressbar (~> 1.4)
     gemrat (0.4.6)
       colored (= 1.2)
     globalid (0.4.0)
@@ -264,6 +267,7 @@ DEPENDENCIES
   byebug
   coffee-rails (~> 4.2)
   devise
+  fuubar
   gemrat
   jbuilder (~> 2.5)
   pg
