@@ -46,6 +46,8 @@ RSpec.describe UsersController, type: :controller do
   let(:user_boss) { build :user_boss }
   let(:user_employer) { build :user_employer }
 
+  # be login to execute test
+  login_admin
 
   describe 'GET #index' do
     it 'returns a success response' do
@@ -57,8 +59,9 @@ RSpec.describe UsersController, type: :controller do
 
   describe 'GET #show' do
     it 'returns a success response' do
+      puts "---------------------#{user_admin.inspect}"
       user_admin
-      get :show, { id: user_admin.to_param }
+      get :show, params: { id: user_admin.to_param }
       expect(response).to be_success
     end
   end
@@ -82,7 +85,7 @@ RSpec.describe UsersController, type: :controller do
     context 'with valid params' do
       it 'creates a new user' do
         expect {
-          post :create, params: { user: valid_attributes } #tengo que definir los valid_attributes?
+          post :create, params: { user: valid_attributes }
         }.to change(User, :count).by(1)
       end
       it 'redirects to the created user' do
@@ -98,29 +101,6 @@ RSpec.describe UsersController, type: :controller do
       end
     end
   end
-=begin
-  describe 'POST #create' do
-    context 'with valid params' do
-      it 'creates a new User' do
-        expect do
-          post :create, params: { user: valid_attributes }, session: valid_session
-        end.to change(User, :count).by(1)
-      end
-
-      it 'redirects to the created user' do
-        post :create, params: { user: valid_attributes }, session: valid_session
-        expect(response).to redirect_to(User.last)
-      end
-    end
-
-    context 'with invalid params' do
-      it "returns a success response (i.e. to display the 'new' template)" do
-        post :create, params: { user: invalid_attributes }, session: valid_session
-        expect(response).to be_success
-      end
-    end
-  end
-=end
 
   describe 'PUT #update' do
     context 'with valid params' do
@@ -144,39 +124,9 @@ RSpec.describe UsersController, type: :controller do
       end
     end
   end
-=begin
-  describe 'PUT #update' do
-    context 'with valid params' do
-      let(:new_attributes) do
-        skip('Add a hash of attributes valid for your model')
-      end
 
-      it 'updates the requested user' do
-        user = User.create! valid_attributes
-        put :update, params: { id: user.to_param, user: new_attributes }, session: valid_session
-        user.reload
-        skip('Add assertions for updated state')
-      end
-
-      it 'redirects to the user' do
-        user = User.create! valid_attributes
-        put :update, params: { id: user.to_param, user: valid_attributes }, session: valid_session
-        expect(response).to redirect_to(user)
-      end
-    end
-
-    context 'with invalid params' do
-      it "returns a success response (i.e. to display the 'edit' template)" do
-        user = User.create! valid_attributes
-        put :update, params: { id: user.to_param, user: invalid_attributes }, session: valid_session
-        expect(response).to be_success
-      end
-    end
-  end
-=end
   describe 'DELETE #destroy' do
     it 'destroys the requested user' do
-      puts "---------------------#{user_admin.inspect}"
       user_admin
       expect {
         delete :destroy, params: { id: user_admin.to_param }
@@ -188,20 +138,4 @@ RSpec.describe UsersController, type: :controller do
       expect(response).to redirect_to(users_url)
     end
   end
-=begin
-  describe 'DELETE #destroy' do
-    it 'destroys the requested user' do
-      user = user_admin
-      expect do
-        delete :destroy, params: { id: user.to_param }, session: valid_session
-      end.to change(User, :count).by(-1)
-    end
-
-    it 'redirects to the users list' do
-      user = user_admin
-      delete :destroy, params: { id: user.to_param }, session: valid_session
-      expect(response).to redirect_to(users_url)
-    end
-  end
-=end
 end

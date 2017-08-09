@@ -1,9 +1,10 @@
 FactoryGirl.define do
   factory :user_admin, class: User do
-    name "sauron"
-    lastname "dark"
-    email "sauron@gmail.com"
+    name {Faker::Name.name}
+    lastname {Faker::Name.last_name}
+    email {Faker::Internet.email}
     role 0
+    password {Faker::Internet.password}
   end
   factory :user_boss, class: User do
     name "legolas"
