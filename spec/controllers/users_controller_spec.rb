@@ -29,13 +29,9 @@ RSpec.describe UsersController, type: :controller do
   # This should return the minimal set of attributes required to create a valid
   # User. As you add validations to User, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) do
-    skip('Add a hash of attributes valid for your model')
-  end
+  let(:valid_attributes) { attributes_for(:user_admin)}
 
-  let(:invalid_attributes) do
-    skip('Add a hash of attributes invalid for your model')
-  end
+  let(:invalid_attributes) {{name: nil}}
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
@@ -59,7 +55,6 @@ RSpec.describe UsersController, type: :controller do
 
   describe 'GET #show' do
     it 'returns a success response' do
-      puts "---------------------#{user_admin.inspect}"
       user_admin
       get :show, params: { id: user_admin.to_param }
       expect(response).to be_success
@@ -118,6 +113,7 @@ RSpec.describe UsersController, type: :controller do
 
     context'with invalid params' do
       it 'returns a success response' do
+        puts "----------------------#{user_admin.inspect}"
         user_admin
         put :update, params: { id: user_admin.to_param, user: invalid_attributes }
         expect(response).to be_success
