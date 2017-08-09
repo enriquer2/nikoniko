@@ -93,6 +93,7 @@ RSpec.describe UsersController, type: :controller do
       end
     end
   end
+=end
 
   shared_examples 'user as employee authorized' do
     before do
@@ -193,4 +194,5 @@ RSpec.describe UsersController, type: :controller do
     login_employee
     it_behaves_like 'user as employee authorized'
   end
+=end
 end
