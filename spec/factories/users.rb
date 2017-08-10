@@ -1,21 +1,23 @@
+# frozen_string_literal: true
+
 FactoryGirl.define do
   factory :user_admin, class: User do
-    name {Faker::Name.last_name}
-    lastname {Faker::Name.name}
-    email {Faker::Internet.email}
+    name { Faker::Name.last_name }
+    lastname { Faker::Name.name }
+    email { Faker::Internet.email }
     role 0
-    password {Faker::Internet.password}
+    password { Faker::Internet.password }
   end
   factory :user_boss, class: User do
-    name "legolas"
-    lastname "arrow"
-    email "legolas@gmail.com"
+    name 'legolas'
+    lastname 'arrow'
+    email 'legolas@gmail.com'
     role 1
   end
   factory :user_employer, class: User do
-    name "frodo"
-    lastname "ring"
-    email "frodo@gmail.com"
+    name 'frodo'
+    lastname 'ring'
+    email 'frodo@gmail.com'
     role 3
   end
 end
