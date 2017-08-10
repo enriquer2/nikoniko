@@ -29,7 +29,7 @@ RSpec.describe UsersController, type: :controller do
   # This should return the minimal set of attributes required to create a valid
   # User. As you add validations to User, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) { attributes_for(:user_admin) }
+  let(:valid_attributes) { attributes_for(:admin) }
 
   let(:invalid_attributes) {{ name: nil }}
 
@@ -38,16 +38,16 @@ RSpec.describe UsersController, type: :controller do
   # UsersController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
-  let(:user_admin) { create :user_admin }
-  let(:user_boss) { build :user_boss }
-  let(:user_employer) { build :user_employer }
+  let(:admin) { create :admin }
+  let(:boss) { build :boss }
+  let(:employer) { build :employer }
 
   # be login to execute test
   login_admin
 
   describe 'GET #index' do
     it 'returns a success response' do
-      user_admin
+      admin
       get :index
       expect(response).to be_success
     end
@@ -55,8 +55,8 @@ RSpec.describe UsersController, type: :controller do
 
   describe 'GET #show' do
     it 'returns a success response' do
-      user_admin
-      get :show, params: { id: user_admin.to_param }
+      admin
+      get :show, params: { id: admin.to_param }
       expect(response).to be_success
     end
   end
@@ -70,8 +70,8 @@ RSpec.describe UsersController, type: :controller do
 
   describe 'GET #edit' do
     it 'returns a success response' do
-      user_admin
-      get :edit, params: { id: user_admin.to_param }
+      admin
+      get :edit, params: { id: admin.to_param }
       expect(response).to be_success
     end
   end
@@ -79,9 +79,9 @@ RSpec.describe UsersController, type: :controller do
   describe 'POST #create' do
     context 'with valid params' do
       it 'creates a new user' do
-        expect {
+        expect do
           post :create, params: { user: valid_attributes }
-        }.to change(User, :count).by(1)
+        end.to change(User, :count).by(1)
       end
       it 'redirects to the created user' do
         post :create, params: { user: valid_attributes }
@@ -100,22 +100,22 @@ RSpec.describe UsersController, type: :controller do
   describe 'PUT #update' do
     context 'with valid params' do
       it 'updates the requested user' do
-        user_admin
-        put :update, params: { id: user_admin.to_param, user: valid_attributes }
-        user_admin.reload
+        admin
+        put :update, params: { id: admin.to_param, user: valid_attributes }
+        admin.reload
       end
       it 'redirects to the user' do
-        user_admin
-        put :update, params: { id: user_admin.to_param, user: valid_attributes }
-        expect(response).to redirect_to(user_admin)
+        admin
+        put :update, params: { id: admin.to_param, user: valid_attributes }
+        expect(response).to redirect_to(admin)
       end
     end
 
     context'with invalid params' do
       it 'returns a success response' do
-        puts "----------------------#{user_admin.inspect}"
-        user_admin
-        put :update, params: { id: user_admin.to_param, user: invalid_attributes }
+        puts "----------------------#{admin.inspect}"
+        admin
+        put :update, params: { id: admin.to_param, user: invalid_attributes }
         expect(response).to be_success
       end
     end
@@ -123,14 +123,14 @@ RSpec.describe UsersController, type: :controller do
 
   describe 'DELETE #destroy' do
     it 'destroys the requested user' do
-      user_admin
-      expect {
-        delete :destroy, params: { id: user_admin.to_param }
-      }.to change(User, :count).by(-1)
+      admin
+      expect do
+        delete :destroy, params: { id: admin.to_param }
+      end.to change(User, :count).by(-1)
     end
     it 'redirects to the users list' do
-      user_admin
-      delete :destroy, params: { id: user_admin.to_param }
+      admin
+      delete :destroy, params: { id: admin.to_param }
       expect(response).to redirect_to(users_url)
     end
   end
