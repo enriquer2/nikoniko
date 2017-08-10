@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ControllerUsers
   def login_admin
     login_user(:admin)
