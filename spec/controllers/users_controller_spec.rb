@@ -38,100 +38,118 @@ RSpec.describe UsersController, type: :controller do
   # UsersController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
-  let(:admin) { create :admin }
-  let(:boss) { build :boss }
-  let(:employer) { build :employer }
-
-  # be login to execute test
-  login_admin
-
-  describe 'GET #index' do
-    it 'returns a success response' do
-      admin
-      get :index
-      expect(response).to be_success
+  shared_examples 'http verbs test' do
+    before do
+      @user = controller.current_user
     end
-  end
-
-  describe 'GET #show' do
-    it 'returns a success response' do
-      admin
-      get :show, params: { id: admin.to_param }
-      expect(response).to be_success
+    describe 'GET #index' do
+      it 'returns a success response' do
+        @user
+        get :index
+        expect(response).to be_success
+      end
     end
-  end
 
-  describe 'GET #new' do
-    it 'returns a success response' do
-      get :new
-      expect(response).to be_success
+    describe 'GET #show' do
+      it 'returns a success response' do
+        @user
+        get :show, params: { id: @user.to_param }
+        expect(response).to be_success
+      end
     end
-  end
 
-  describe 'GET #edit' do
-    it 'returns a success response' do
-      admin
-      get :edit, params: { id: admin.to_param }
-      expect(response).to be_success
+    describe 'GET #new' do
+      it 'returns a success response' do
+        get :new
+        expect(response).to be_success
+      end
     end
-  end
 
-  describe 'POST #create' do
-    context 'with valid params' do
-      it 'creates a new user' do
-        expect do
+    describe 'GET #edit' do
+      it 'returns a success response' do
+        @user
+        get :edit, params: { id: @user.to_param }
+        expect(response).to be_success
+      end
+    end
+
+    describe 'POST #create' do
+      context 'with valid params' do
+        it 'creates a new user' do
+          expect do
+            post :create, params: { user: valid_attributes }
+          end.to change(User, :count).by(1)
+        end
+        it 'redirects to the created user' do
           post :create, params: { user: valid_attributes }
-        end.to change(User, :count).by(1)
+          expect(response).to redirect_to(User.last)
+        end
       end
-      it 'redirects to the created user' do
-        post :create, params: { user: valid_attributes }
-        expect(response).to redirect_to(User.last)
+
+      context 'with invalid params' do
+        it 'returns a success response' do
+          post :create, params: { user: invalid_attributes }
+          expect(response).to be_success
+        end
       end
     end
 
-    context 'with invalid params' do
-      it 'returns a success response' do
-        post :create, params: { user: invalid_attributes }
-        expect(response).to be_success
+    describe 'PUT #update' do
+      context 'with valid params' do
+        it 'updates the requested user' do
+          @user
+          put :update, params: { id: @user.to_param, user: valid_attributes }
+          @user.reload
+        end
+        it 'redirects to the user' do
+          @user
+          put :update, params: { id: @user.to_param, user: valid_attributes }
+          expect(response).to redirect_to(@user)
+        end
+      end
+
+      context'with invalid params' do
+        it 'returns a success response' do
+          @user
+          put :update, params: { id: @user.to_param, user: invalid_attributes }
+          expect(response).to be_success
+        end
+      end
+    end
+
+    describe 'DELETE #destroy' do
+      it 'destroys the requested user' do
+        @user
+        expect do
+          delete :destroy, params: { id: @user.to_param }
+        end.to change(User, :count).by(-1)
+      end
+      it 'redirects to the users list' do
+        @user
+        delete :destroy, params: { id: @user.to_param }
+        expect(response).to redirect_to(users_url)
       end
     end
   end
 
-  describe 'PUT #update' do
-    context 'with valid params' do
-      it 'updates the requested user' do
-        admin
-        put :update, params: { id: admin.to_param, user: valid_attributes }
-        admin.reload
-      end
-      it 'redirects to the user' do
-        admin
-        put :update, params: { id: admin.to_param, user: valid_attributes }
-        expect(response).to redirect_to(admin)
-      end
-    end
-
-    context'with invalid params' do
-      it 'returns a success response' do
-        puts "----------------------#{admin.inspect}"
-        admin
-        put :update, params: { id: admin.to_param, user: invalid_attributes }
-        expect(response).to be_success
-      end
-    end
+  context 'with user admin' do
+    # be login to execute test
+    login_admin
+    it_behaves_like 'http verbs test'
   end
 
-  describe 'DELETE #destroy' do
-    it 'destroys the requested user' do
-      admin
-      expect do
-        delete :destroy, params: { id: admin.to_param }
-      end.to change(User, :count).by(-1)
-    end
-    it 'redirects to the users list' do
-      admin
-      delete :destroy, params: { id: admin.to_param }
-      expect(response).to redirect_to(users_url)
-    end
+  context 'with user boss' do
+    login_boss
+    it_behaves_like 'http verbs test'
+  end
+
+  context 'with user teamleader' do
+    login_teamleader
+    it_behaves_like 'http verbs test'
+  end
+
+  context 'with user employer' do
+    login_employer
+    it_behaves_like 'http verbs test'
   end
 end

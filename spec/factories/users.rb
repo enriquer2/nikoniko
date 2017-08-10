@@ -15,6 +15,13 @@ FactoryGirl.define do
     role 1
     password { Faker::Internet.password }
   end
+  factory :teamleader, class: User do
+    name { Faker::Name.last_name }
+    lastname { Faker::Name.name }
+    email { Faker::Internet.email }
+    role 2
+    password { Faker::Internet.password }
+  end
   factory :employer, class: User do
     name { Faker::Name.last_name }
     lastname { Faker::Name.name }
