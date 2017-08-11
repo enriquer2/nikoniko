@@ -9,7 +9,7 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true
   validates :role, presence: true
 
-  enum roles: { admin: 0, boss: 1, teamleader: 2, employee: 3 }
+  enum role: { admin: 0, boss: 1, teamleader: 2, employee: 3 }
 
   protected
 
