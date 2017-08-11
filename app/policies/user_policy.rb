@@ -9,7 +9,11 @@ class UserPolicy < ApplicationPolicy
     end
   end
   def index?
-    true
+    user.admin? || user.boss? || user.teamleader? || user.employee?
+  end
+
+  def show?
+    user.admin? || user.boss? || user.teamleader? || user.employee?
   end
 
   def show?
