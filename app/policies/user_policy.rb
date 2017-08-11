@@ -8,24 +8,35 @@ class UserPolicy < ApplicationPolicy
       elsif user.teamleader?
         scope.where(role: User.roles[:teamleader])
       else
-        scope.where(role: User.roles[:employer])
+        scope.where(role: User.roles[:employee])
       end
     end
   end
-
   def index?
-    true
+    user.admin? || user.boss? || user.teamleader? || user.employee?
   end
 
-  def create? # este ya no haria falta si hemos puesto que tiene que estar registrado siempre, no?
-    user_signed_in?
+  def show?
+    user.admin? || user.boss? || user.teamleader? || user.employee?
+  end
+
+  def create?
+    user.admin? || user.boss? || user.teamleader?
+  end
+
+  def new?
+    create?
   end
 
   def update? # modificar usuario si esta registrado y es boss
-    return true if user_signed_in? && (user.admin? || user.boss?)
+    user.admin? || user.boss? || user.teamleader? || user.employee?
+  end
+
+  def edit?
+    update?
   end
 
   def destroy? # destruir usuario si esta registrado y es boss o jefe de equipo
-    return true if user_signed_in? && (user.admin? || user.boss? == 1 || user.teamleader? == 2)
+    user.admin? || user.boss? || user.teamleader?
   end
 end

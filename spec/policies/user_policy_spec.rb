@@ -1,34 +1,68 @@
+require 'rails_helper'
+
 describe UserPolicy do
-  let(:admin) {{FactoryGirl.create(:admin)}} ## revisar!!!!!
   shared_examples 'user fully authorized' do
-    before do
-      @user = controller.current_user
-    end
-
-    describe 'GET #index' do
-      it 'returns a success response' do
-        @user
-        get :index
-        expect(response).to be_success
-      end
-    end
-
-    describe 'GET #show' do
-      it 'returns a success response' do
-        @user
-        get :show, params: { id: @user.to_param }
-        expect(response).to be_success
-      end
-    end
+    it { is_expected.to permit(:index) }
+    it { is_expected.to permit(:show) }
+    it { is_expected.to permit(:create) }
+    it { is_expected.to permit(:new) }
+    it { is_expected.to permit(:update) }
+    it { is_expected.to permit(:edit) }
+    it { is_expected.to permit(:destroy) }
   end
+
+  shared_examples 'user boss authorized' do
+    it { is_expected.to permit(:index) }
+    it { is_expected.to permit(:show) }
+    it { is_expected.to permit(:create) }
+    it { is_expected.to permit(:new) }
+    it { is_expected.to permit(:update) }
+    it { is_expected.to permit(:edit) }
+    it { is_expected.to permit(:destroy) }
+  end
+
   shared_examples 'user team authorized' do
+    it { is_expected.to permit(:index) }
+    it { is_expected.to permit(:show) }
+    it { is_expected.to permit(:create) }
+    it { is_expected.to permit(:new) }
+    it { is_expected.to permit(:update) }
+    it { is_expected.to permit(:edit) }
+    it { is_expected.to permit(:destroy) }
   end
-  shared_examples 'user employer authorized' do
+
+  shared_examples 'user employee authorized' do
+    it { is_expected.to permit(:index) }
+    it { is_expected.to permit(:show) }
+    it { is_expected.to_not permit(:create) }
+    it { is_expected.to_not permit(:new) }
+    it { is_expected.to permit(:update) }
+    it { is_expected.to permit(:edit) }
+    it { is_expected.to_not permit(:destroy) }
   end
 
   context 'with user admin' do
-    # be login to execute test
     login_admin
-    it_behaves_like 'http verbs test'
+    subject { UserPolicy.new(admin, user) }
+    # que puede hacer quien sobre que
+    it_behaves_like 'user fully authorized'
+  end
+  context 'with user admin' do
+    login_boss
+    subject { UserPolicy.new(boss, user) }
+    # que puede hacer quien sobre que
+    it_behaves_like 'user boss authorized'
+  end
+  context 'with user admin' do
+    login_teamleader
+    subject { UserPolicy.new(teamleader, user) }
+    # que puede hacer quien sobre que
+    it_behaves_like 'user team authorized'
+  end
+  context 'with user admin' do
+    login_employee
+    subject { UserPolicy.new(employee, user) }
+    # que puede hacer quien sobre que
+    it_behaves_like 'user employee authorized'
   end
 end
