@@ -36,10 +36,10 @@ module ControllerUsers
       sign_in user
     end
   end
-  def login_employer
+  def login_employee
     before(:each) do
       @request.env['devise.mapping'] = Devise.mappings[:user]
-      user = create(:employer)
+      user = create(:employee)
       sign_in user
     end
   end
