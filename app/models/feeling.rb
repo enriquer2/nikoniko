@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Feeling < ApplicationRecord
   HEAVEN = 5
   SATISFIED = 4
