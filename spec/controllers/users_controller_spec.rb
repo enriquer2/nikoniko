@@ -274,7 +274,7 @@ RSpec.describe UsersController, type: :controller do
     it_behaves_like 'user fully authorized'
   end
 
-  context 'with user employee' do
+  context 'with user employer' do
     login_employee
     it_behaves_like 'user as employee authorized'
   end
