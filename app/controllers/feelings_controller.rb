@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class FeelingsController < ApplicationController
   before_action :set_feeling, only: %i[show edit update destroy]
 
