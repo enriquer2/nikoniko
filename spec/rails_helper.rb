@@ -39,6 +39,7 @@ RSpec.configure do |config|
   # Simulate be log in for executing the test
   config.include Devise::Test::ControllerHelpers
   config.extend ControllerUsers, type: :controller
+  #config.extend RequestPolicy, type: :request
 
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and
