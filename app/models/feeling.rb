@@ -1,6 +1,6 @@
 class Feeling < ApplicationRecord
   belongs_to :user
 
-  # validates :day
+  validates :date
   validates :status, presence: true
 end
