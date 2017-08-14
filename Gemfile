@@ -27,7 +27,6 @@ end
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'fuubar'
   gem 'rspec-rails'
   gem 'rubocop', '~> 0.48.1', require: false
   gem 'rubocop-rspec'
