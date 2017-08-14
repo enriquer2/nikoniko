@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class User < ApplicationRecord
   after_initialize :set_default_value
   # Include default devise modules. Others available are:

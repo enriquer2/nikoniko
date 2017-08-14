@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module ControllerUsers
   def login_admin
     before(:each) do
