@@ -27,104 +27,210 @@ RSpec.describe TeamsController, type: :controller do
   # This should return the minimal set of attributes required to create a valid
   # Team. As you add validations to Team, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) do
-    skip('Add a hash of attributes valid for your model')
-  end
+  let(:valid_attributes) { attributes_for(:team) }
+  let(:team) { create(:team) }
 
-  let(:invalid_attributes) do
-    skip('Add a hash of attributes invalid for your model')
-  end
+  let(:invalid_attributes) {{ name: nil }}
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
-  # TeamsController. Be sure to keep this updated too.
+  # UsersController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
-  describe 'GET #index' do
-    it 'returns a success response' do
-      team = Team.create! valid_attributes
-      get :index, params: {}, session: valid_session
-      expect(response).to be_success
+  shared_examples 'user fully authorized' do
+    before do
+      @user = controller.current_user
     end
-  end
-
-  describe 'GET #show' do
-    it 'returns a success response' do
-      team = Team.create! valid_attributes
-      get :show, params: { id: team.to_param }, session: valid_session
-      expect(response).to be_success
+    describe 'GET #index' do
+      it 'returns a success response' do
+        @user
+        get :index
+        expect(response).to be_success
+      end
     end
-  end
 
-  describe 'GET #new' do
-    it 'returns a success response' do
-      get :new, params: {}, session: valid_session
-      expect(response).to be_success
+    describe 'GET #show' do
+      it 'returns a success response' do
+        @user
+        get :show, params: { id: team.to_param }
+        expect(response).to be_success
+      end
     end
-  end
 
-  describe 'GET #edit' do
-    it 'returns a success response' do
-      team = Team.create! valid_attributes
-      get :edit, params: { id: team.to_param }, session: valid_session
-      expect(response).to be_success
+    describe 'GET #new' do
+      it 'returns a success response' do
+        get :new
+        expect(response).to be_success
+      end
     end
-  end
 
-  describe 'POST #create' do
-    context 'with valid params' do
-      it 'creates a new Team' do
+    describe 'GET #edit' do
+      it 'returns a success response' do
+        @user
+        get :edit, params: { id: team.to_param }
+        expect(response).to be_success
+      end
+    end
+
+    describe 'POST #create' do
+      context 'with valid params' do
+        it 'creates a new user' do
+          expect do
+            post :create, params: { team: valid_attributes }
+          end.to change(Team, :count).by(1)
+        end
+        it 'redirects to the created user' do
+          post :create, params: { team: valid_attributes }
+          expect(response).to redirect_to(Team.last)
+        end
+      end
+
+      context 'with invalid params' do
+        it 'returns a success response' do
+          post :create, params: { team: invalid_attributes }
+          expect(response).to be_success
+        end
+      end
+    end
+
+    describe 'PUT #update' do
+      context 'with valid params' do
+        it 'updates the requested user' do
+          @user
+          put :update, params: { id: @team.to_param, team: valid_attributes }
+          @team.reload
+        end
+        it 'redirects to the user' do
+          @user
+          put :update, params: { id: @team.to_param, team: valid_attributes }
+          expect(response).to redirect_to(@team)
+        end
+      end
+
+      context'with invalid params' do
+        it 'returns a success response' do
+          @user
+          put :update, params: { id: @team.to_param, team: invalid_attributes }
+          expect(response).to be_success
+        end
+      end
+    end
+
+    describe 'DELETE #destroy' do
+      it 'destroys the requested user' do
+        @user
         expect do
-          post :create, params: { team: valid_attributes }, session: valid_session
-        end.to change(Team, :count).by(1)
+          delete :destroy, params: { id: @team.to_param }
+        end.to change(Team, :count).by(-1)
       end
-
-      it 'redirects to the created team' do
-        post :create, params: { team: valid_attributes }, session: valid_session
-        expect(response).to redirect_to(Team.last)
-      end
-    end
-
-    context 'with invalid params' do
-      it "returns a success response (i.e. to display the 'new' template)" do
-        post :create, params: { team: invalid_attributes }, session: valid_session
-        expect(response).to be_success
+      it 'redirects to the users list' do
+        @user
+        delete :destroy, params: { id: @team.to_param }
+        expect(response).to redirect_to(teams_url)
       end
     end
   end
 
-  describe 'PUT #update' do
-    context 'with valid params' do
-      let(:new_attributes) {}
-
-      it 'redirects to the team' do
-        team = Team.create! valid_attributes
-        put :update, params: { id: team.to_param, team: valid_attributes }, session: valid_session
-        expect(response).to redirect_to(team)
+  shared_examples 'user as teamleader authorized' do
+    before do
+      @user = controller.current_user
+    end
+    describe 'GET #index' do
+      it 'returns a success response' do
+        @user
+        get :index
+        expect(response).to be_success
       end
     end
 
-    context 'with invalid params' do
-      it "returns a success response (i.e. to display the 'edit' template)" do
-        team = Team.create! valid_attributes
-        put :update, params: { id: team.to_param, team: invalid_attributes }, session: valid_session
+    describe 'GET #show' do
+      it 'returns a success response' do
+        @user
+        get :show, params: { id: @team.to_param }
         expect(response).to be_success
+      end
+    end
+
+    describe 'GET #new' do
+      it 'not allow to return a success response' do
+        get :new
+        expect(response).to redirect_to(teams_url)
+      end
+    end
+
+    describe 'GET #edit' do
+      it 'returns a success response' do
+        @user
+        get :edit, params: { id: @team.to_param }
+        expect(response).to be_success
+      end
+    end
+
+    describe 'POST #create' do
+      context 'with valid params' do
+        it 'not allow to create a new user' do
+          expect do
+            post :create, params: { team: valid_attributes }
+          end.to change(User, :count).by(0)
+        end
+        it 'redirects to the users list' do
+          post :create, params: { team: valid_attributes }
+          expect(response).to redirect_to(teams_url)
+        end
+      end
+    end
+
+    describe 'PUT #update' do
+      context 'with valid params' do
+        it 'updates the requested user' do
+          @user
+          put :update, params: { id: @team.to_param, team: valid_attributes }
+          @team.reload
+        end
+        it 'redirects to the user' do
+          @user
+          put :update, params: { id: @team.to_param, team: valid_attributes }
+          expect(response).to redirect_to(@team)
+        end
+      end
+
+      context'with invalid params' do
+        it 'returns a success response' do
+          @user
+          put :update, params: { id: @team.to_param, team: invalid_attributes }
+          expect(response).to be_success
+        end
+      end
+    end
+
+    describe 'DELETE #destroy' do
+      it 'not allow to destroy the requested user' do
+        @user
+        expect do
+          delete :destroy, params: { id: @team.to_param }
+        end.to change(User, :count).by(0)
+      end
+      it 'redirects to the users list' do
+        @user
+        delete :destroy, params: { id: @team.to_param }
+        expect(response).to redirect_to(teams_url)
       end
     end
   end
 
-  describe 'DELETE #destroy' do
-    it 'destroys the requested team' do
-      team = Team.create! valid_attributes
-      expect do
-        delete :destroy, params: { id: team.to_param }, session: valid_session
-      end.to change(Team, :count).by(-1)
-    end
+  context 'with user admin' do
+    # be login to execute test
+    login_admin
+    it_behaves_like 'user fully authorized'
+  end
 
-    it 'redirects to the teams list' do
-      team = Team.create! valid_attributes
-      delete :destroy, params: { id: team.to_param }, session: valid_session
-      expect(response).to redirect_to(teams_url)
-    end
+  context 'with user boss' do
+    login_boss
+    it_behaves_like 'user fully authorized'
+  end
+
+  context 'with user teamleader' do
+    login_teamleader
+    it_behaves_like 'user as teamleader authorized'
   end
 end
