@@ -3,43 +3,43 @@ require 'rails_helper'
 RSpec.describe UserPolicy do
   let(:user) { FactoryGirl.create(:user) }
   shared_examples 'user fully authorized' do
-    it { is_expected.to permit(:index) }
-    it { is_expected.to permit(:show) }
-    it { is_expected.to permit(:create) }
-    it { is_expected.to permit(:new) }
-    it { is_expected.to permit(:update) }
-    it { is_expected.to permit(:edit) }
-    it { is_expected.to permit(:destroy) }
+    it { is_expected.to permit_action(:index) }
+    it { is_expected.to permit_action(:show) }
+    it { is_expected.to permit_action(:create) }
+    it { is_expected.to permit_action(:new) }
+    it { is_expected.to permit_action(:update) }
+    it { is_expected.to permit_action(:edit) }
+    it { is_expected.to permit_action(:destroy) }
   end
 
   shared_examples 'user boss authorized' do
-    it { is_expected.to permit(:index) }
-    it { is_expected.to permit(:show) }
-    it { is_expected.to permit(:create) }
-    it { is_expected.to permit(:new) }
-    it { is_expected.to permit(:update) }
-    it { is_expected.to permit(:edit) }
-    it { is_expected.to permit(:destroy) }
+    it { is_expected.to permit_action(:index) }
+    it { is_expected.to permit_action(:show) }
+    it { is_expected.to permit_action(:create) }
+    it { is_expected.to permit_action(:new) }
+    it { is_expected.to permit_action(:update) }
+    it { is_expected.to permit_action(:edit) }
+    it { is_expected.to permit_action(:destroy) }
   end
 
   shared_examples 'user team authorized' do
-    it { is_expected.to permit(:index) }
-    it { is_expected.to permit(:show) }
-    it { is_expected.to permit(:create) }
-    it { is_expected.to permit(:new) }
-    it { is_expected.to permit(:update) }
-    it { is_expected.to permit(:edit) }
-    it { is_expected.to permit(:destroy) }
+    it { is_expected.to permit_action(:index) }
+    it { is_expected.to permit_action(:show) }
+    it { is_expected.to permit_action(:create) }
+    it { is_expected.to permit_action(:new) }
+    it { is_expected.to permit_action(:update) }
+    it { is_expected.to permit_action(:edit) }
+    it { is_expected.to permit_action(:destroy) }
   end
 
   shared_examples 'user employee authorized' do
-    it { is_expected.to permit(:index) }
-    it { is_expected.to permit(:show) }
-    it { is_expected.not_to permit(:create) }
-    it { is_expected.not_to permit(:new) }
-    it { is_expected.to permit(:update) }
-    it { is_expected.to permit(:edit) }
-    it { is_expected.not_to permit(:destroy) }
+    it { is_expected.to permit_action(:index) }
+    it { is_expected.to permit_action(:show) }
+    it { is_expected.not_to permit_action(:create) }
+    it { is_expected.not_to permit_action(:new) }
+    it { is_expected.to permit_action(:update) }
+    it { is_expected.to permit_action(:edit) }
+    it { is_expected.not_to permit_action(:destroy) }
   end
 
   context 'with user admin' do
