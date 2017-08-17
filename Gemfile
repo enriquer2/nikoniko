@@ -18,6 +18,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'fuubar'
+  gem 'pundit-matchers', '~> 1.3.1'
 end
 
 group :development do
