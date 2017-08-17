@@ -134,6 +134,7 @@ RSpec.describe TeamsController, type: :controller do
   shared_examples 'user as teamleader authorized' do
     before do
       @user = controller.current_user
+      @team1 = create(:team,user: @user)
     end
     describe 'GET #index' do
       it 'returns a success response' do
@@ -146,7 +147,7 @@ RSpec.describe TeamsController, type: :controller do
     describe 'GET #show' do
       it 'returns a success response' do
         @user
-        get :show, params: { id: @team.to_param }
+        get :show, params: { id: @team1.to_param }
         expect(response).to be_success
       end
     end
@@ -161,7 +162,7 @@ RSpec.describe TeamsController, type: :controller do
     describe 'GET #edit' do
       it 'returns a success response' do
         @user
-        get :edit, params: { id: @team.to_param }
+        get :edit, params: { id: @team1.to_param }
         expect(response).to be_success
       end
     end
@@ -184,20 +185,20 @@ RSpec.describe TeamsController, type: :controller do
       context 'with valid params' do
         it 'updates the requested user' do
           @user
-          put :update, params: { id: @team.to_param, team: valid_attributes }
+          put :update, params: { id: @team1.to_param, team: valid_attributes }
           @team.reload
         end
         it 'redirects to the user' do
           @user
-          put :update, params: { id: @team.to_param, team: valid_attributes }
-          expect(response).to redirect_to(@team)
+          put :update, params: { id: @team1.to_param, team: valid_attributes }
+          expect(response).to redirect_to(@team1)
         end
       end
 
       context'with invalid params' do
         it 'returns a success response' do
           @user
-          put :update, params: { id: @team.to_param, team: invalid_attributes }
+          put :update, params: { id: @team1.to_param, team: invalid_attributes }
           expect(response).to be_success
         end
       end
@@ -207,12 +208,12 @@ RSpec.describe TeamsController, type: :controller do
       it 'not allow to destroy the requested user' do
         @user
         expect do
-          delete :destroy, params: { id: @team.to_param }
+          delete :destroy, params: { id: @team1.to_param }
         end.to change(User, :count).by(0)
       end
       it 'redirects to the users list' do
         @user
-        delete :destroy, params: { id: @team.to_param }
+        delete :destroy, params: { id: @team1.to_param }
         expect(response).to redirect_to(teams_url)
       end
     end
