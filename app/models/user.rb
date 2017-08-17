@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  belongs_to :team
   after_initialize :set_default_value
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
