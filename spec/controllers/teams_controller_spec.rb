@@ -96,6 +96,7 @@ RSpec.describe TeamsController, type: :controller do
   shared_examples 'user as teamleader authorized' do
     before do
       @user = controller.current_user
+      @team1 = create(:team,user: @user)
     end
     describe 'GET #index' do
       it 'returns a success response' do
