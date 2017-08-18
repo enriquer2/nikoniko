@@ -5,7 +5,7 @@ class TeamsController < ApplicationController
   # GET /teams.json
   def index
     @teams = Team.all
-    authorize @users
+    authorize @teams # This authorize actual user to work with these @teams
   end
 
   # GET /teams/1
@@ -15,7 +15,7 @@ class TeamsController < ApplicationController
   # GET /teams/new
   def new
     @team = Team.new
-    authorize @users
+    authorize @team
   end
 
   # GET /teams/1/edit
@@ -25,7 +25,7 @@ class TeamsController < ApplicationController
   # POST /teams.json
   def create
     @team = Team.new(team_params)
-    authorize @users
+    authorize @team
 
     respond_to do |format|
       if @team.save
@@ -67,7 +67,7 @@ class TeamsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_team
     @team = Team.find(params[:id])
-    authorize @users
+    authorize @team
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
