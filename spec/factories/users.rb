@@ -4,6 +4,7 @@ FactoryGirl.define do
     lastname { Faker::Name.name }
     email { "#{name}@gmail.com".downcase }
     password { Faker::Internet.password }
+    team_id { Team.first.id } # This line is for test user_policy_spec
 
     factory :admin, class: User do
       role 'admin'
