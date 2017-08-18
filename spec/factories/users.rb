@@ -2,7 +2,7 @@ FactoryGirl.define do
   factory :user do
     name { Faker::Name.last_name }
     lastname { Faker::Name.name }
-    email { Faker::Internet.email }
+    email { "#{name}@gmail.com".downcase }
     password { Faker::Internet.password }
 
     factory :admin, class: User do
