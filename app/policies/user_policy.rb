@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class UserPolicy < ApplicationPolicy
-  class Scope
+  class Scope < Scope
     def resolve
       if user.admin? || user.boss?
         scope.all

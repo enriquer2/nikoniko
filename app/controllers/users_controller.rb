@@ -4,7 +4,8 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    #@users = User.all
+    @users = policy_scope(User)
     authorize @users
   end
 
