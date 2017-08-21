@@ -1,4 +1,8 @@
 class User < ApplicationRecord
+  ADMIN = 0
+  BOSS = 1
+  TEAMLEADER = 2
+  EMPLOYEE = 3
   belongs_to :team
   after_initialize :set_default_value
   # Include default devise modules. Others available are:
@@ -10,7 +14,7 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true
   validates :role, presence: true
 
-  enum role: { admin: 0, boss: 1, teamleader: 2, employee: 3 }
+  enum role: { admin: ADMIN, boss: BOSS, teamleader: TEAMLEADER, employee: EMPLOYEE }
 
   protected
 
