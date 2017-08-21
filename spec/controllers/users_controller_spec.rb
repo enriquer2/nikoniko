@@ -177,7 +177,6 @@ RSpec.describe UsersController, type: :controller do
     end
     describe 'GET #index' do
       it 'returns a success response' do
-        @user
         get :index
         expect(response).to be_success
       end
@@ -185,7 +184,6 @@ RSpec.describe UsersController, type: :controller do
 
     describe 'GET #show' do
       it 'returns a success response' do
-        @user
         get :show, params: { id: @user.to_param }
         expect(response).to be_success
       end
@@ -200,7 +198,6 @@ RSpec.describe UsersController, type: :controller do
 
     describe 'GET #edit' do
       it 'returns a success response' do
-        @user
         get :edit, params: { id: @user.to_param }
         expect(response).to be_success
       end
@@ -223,12 +220,10 @@ RSpec.describe UsersController, type: :controller do
     describe 'PUT #update' do
       context 'with valid params' do
         it 'updates the requested user' do
-          @user
           put :update, params: { id: @user.to_param, user: valid_attributes }
           @user.reload
         end
         it 'redirects to the user' do
-          @user
           put :update, params: { id: @user.to_param, user: valid_attributes }
           expect(response).to redirect_to(@user)
         end
@@ -236,7 +231,6 @@ RSpec.describe UsersController, type: :controller do
 
       context'with invalid params' do
         it 'returns a success response' do
-          @user
           put :update, params: { id: @user.to_param, user: invalid_attributes }
           expect(response).to be_success
         end
@@ -245,13 +239,11 @@ RSpec.describe UsersController, type: :controller do
 
     describe 'DELETE #destroy' do
       it 'not allow to destroy the requested user' do
-        @user
         expect do
           delete :destroy, params: { id: @user.to_param }
         end.to change(User, :count).by(0)
       end
       it 'redirects to the users list' do
-        @user
         delete :destroy, params: { id: @user.to_param }
         expect(response).to redirect_to(users_url)
       end

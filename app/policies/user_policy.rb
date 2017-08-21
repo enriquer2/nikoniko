@@ -13,7 +13,7 @@ class UserPolicy < ApplicationPolicy
   end
 
   def show?
-    user.admin? || user.boss? || user.teamleader? || user.employee?
+    true
   end
 
   def show?
