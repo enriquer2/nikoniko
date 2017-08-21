@@ -6,7 +6,8 @@ class TeamPolicy < ApplicationPolicy
       if user.admin? || user.boss?
         scope.all
       else user.teamleader?
-        scope.where(user.id exists in team.users) ## cambiar
+        scope.where(team: user.team)
+      end
     end
   end
   def index? # ver equipos si esta registrado y es boss
