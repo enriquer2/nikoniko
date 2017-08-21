@@ -4,7 +4,7 @@ class TeamsController < ApplicationController
   # GET /teams
   # GET /teams.json
   def index
-    @teams = Team.all
+    @teams = policy_scope(Team)
     authorize @teams # This authorize actual user to work with these @teams
   end
 
