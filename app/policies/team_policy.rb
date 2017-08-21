@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 class TeamPolicy < ApplicationPolicy
-  class Scope
+  class Scope < Scope
     def resolve
       if user.admin? || user.boss?
         scope.all
       else user.teamleader?
-        scope.where(team: user.team)
+        scope.where(id: user.team_id)
       end
     end
   end
