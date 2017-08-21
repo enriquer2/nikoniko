@@ -119,9 +119,10 @@ RSpec.describe TeamsController, type: :controller do
     describe 'DELETE #destroy' do
       it 'destroys the requested user' do
         @user
-        expect do
-          delete :destroy, params: { id: team.to_param }
-        end.to change(Team, :count).by(-1)
+        team #necesitamos llamar a team para que cuando haga el borrado en destroy no cree el team con "team.to_param"
+        count = Team.count
+        delete :destroy, params: { id: team.to_param }
+        expect(Team.count).to eq count-1
       end
       it 'redirects to the users list' do
         @user
