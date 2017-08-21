@@ -20,6 +20,6 @@ class User < ApplicationRecord
   protected
 
   def set_default_value
-    role = self.role || employee
+    role || employee
   end
 end

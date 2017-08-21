@@ -1,16 +1,14 @@
-# frozen_string_literal: true
-
 class TeamPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       if user.admin? || user.boss?
         scope.all
-      else user.teamleader?
+      elsif user.teamleader?
         scope.where(id: user.team_id)
       end
     end
   end
-  def index? # ver equipos si esta registrado y es boss
+  def index?
     user.admin? || user.boss? || user.teamleader?
   end
 
@@ -18,7 +16,7 @@ class TeamPolicy < ApplicationPolicy
     user.admin? || user.boss? || user.teamleader?
   end
 
-  def create? # crear equipo si esta registrado y es boss
+  def create?
     user.admin? || user.boss?
   end
 
@@ -26,7 +24,7 @@ class TeamPolicy < ApplicationPolicy
     create?
   end
 
-  def update? # modificar equipo si esta registrado y es boss o si es jefe de equipo
+  def update?
     user.admin? || user.boss? || user.teamleader?
   end
 
@@ -34,7 +32,7 @@ class TeamPolicy < ApplicationPolicy
     update?
   end
 
-  def destroy? # destruir equipo si esta registrado y es boss
+  def destroy?
     user.admin? || user.boss?
   end
 end

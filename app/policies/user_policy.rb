@@ -1,14 +1,10 @@
-# frozen_string_literal: true
-
 class UserPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       if user.admin? || user.boss?
         scope.all
       elsif user.teamleader?
-        scope.where(role: User.roles[:teamleader])
-      else
-        scope.where(role: User.roles[:employee])
+        scope.where(role: user.team)
       end
     end
   end
@@ -17,7 +13,7 @@ class UserPolicy < ApplicationPolicy
   end
 
   def show?
-    user.admin? || user.boss? || user.teamleader? || user.employee?
+    true
   end
 
   def create?
@@ -28,15 +24,15 @@ class UserPolicy < ApplicationPolicy
     create?
   end
 
-  def update? # modificar usuario si esta registrado y es boss
-    user.admin? || user.boss? || user.teamleader? || user.employee?
+  def update?
+    true
   end
 
   def edit?
     update?
   end
 
-  def destroy? # destruir usuario si esta registrado y es boss o jefe de equipo
+  def destroy?
     user.admin? || user.boss? || user.teamleader?
   end
 end

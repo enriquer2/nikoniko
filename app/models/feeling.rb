@@ -9,5 +9,5 @@ class Feeling < ApplicationRecord
   validates :day, presence: true
   validates :status, presence: true
 
-  enum status: { heaven: HEAVEN, satisfied: SATISFIED, frustrated: FRUSTRATED, upset: UPSET, purgatory: PURGATORY}
+  enum status: { heaven: HEAVEN, satisfied: SATISFIED, frustrated: FRUSTRATED, upset: UPSET, purgatory: PURGATORY }
 end

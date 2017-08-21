@@ -1,16 +1,14 @@
-# frozen_string_literal: true
-
 class FeelingPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       if user.admin? || user.boss?
         scope.all
-      else #permisos de teamleader y employee iguales
+      else # permisos de teamleader y employee iguales
         scope.where(id: user.team_id)
       end
     end
   end
-  def index? # ver feeling si es cualquiera
+  def index?
     user.admin? || user.boss? || user.teamleader? || user.employee?
   end
 
@@ -18,7 +16,7 @@ class FeelingPolicy < ApplicationPolicy
     user.admin? || user.boss? || user.teamleader? || user.employee?
   end
 
-  def create? # crear feeling si es cualquiera
+  def create?
     user.admin? || user.boss? || user.teamleader? || user.employee?
   end
 
@@ -26,7 +24,7 @@ class FeelingPolicy < ApplicationPolicy
     create?
   end
 
-  def update? # modificar feeling si es cualquiera
+  def update?
     user.admin? || user.boss? || user.teamleader? || user.employee?
   end
 
@@ -34,7 +32,7 @@ class FeelingPolicy < ApplicationPolicy
     update?
   end
 
-  def destroy? # destruir un feeling si eres cualquiera
+  def destroy?
     user.admin? || user.boss? || user.teamleader? || user.employee?
   end
 end

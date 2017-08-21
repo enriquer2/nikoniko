@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe UserPolicy do
   let(:user) { FactoryGirl.create(:user) }
+
   shared_examples 'user fully authorized' do
     it { is_expected.to permit_action(:index) }
     it { is_expected.to permit_action(:show) }
@@ -43,23 +44,23 @@ RSpec.describe UserPolicy do
   end
 
   context 'with user admin' do
-    subject { UserPolicy.new(create(:admin), user) }
-    # que puede hacer quien sobre que
+    subject { described_class.new(create(:admin), user) } # que puede hacer quien sobre que
+
     it_behaves_like 'user fully authorized'
   end
   context 'with user boss' do
-    subject { UserPolicy.new(create(:boss), user) }
-    # que puede hacer quien sobre que
+    subject { described_class.new(create(:boss), user) }
+
     it_behaves_like 'user boss authorized'
   end
   context 'with user teamleader' do
-    subject { UserPolicy.new(create(:teamleader), user) }
-    # que puede hacer quien sobre que
+    subject { described_class.new(create(:teamleader), user) }
+
     it_behaves_like 'user team authorized'
   end
   context 'with user employee' do
-    subject { UserPolicy.new(create(:employee), user) }
-    # que puede hacer quien sobre que
+    subject { described_class.new(create(:employee), user) }
+
     it_behaves_like 'user employee authorized'
   end
 end

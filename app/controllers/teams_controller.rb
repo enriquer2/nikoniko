@@ -2,14 +2,12 @@ class TeamsController < ApplicationController
   before_action :set_team, only: %i[show edit update destroy]
 
   # GET /teams
-  # GET /teams.json
   def index
     @teams = policy_scope(Team)
     authorize @teams # This authorize actual user to work with these @teams
   end
 
   # GET /teams/1
-  # GET /teams/1.json
   def show; end
 
   # GET /teams/new
@@ -22,7 +20,6 @@ class TeamsController < ApplicationController
   def edit; end
 
   # POST /teams
-  # POST /teams.json
   def create
     @team = Team.new(team_params)
     authorize @team
@@ -30,35 +27,28 @@ class TeamsController < ApplicationController
     respond_to do |format|
       if @team.save
         format.html { redirect_to @team, notice: 'Team was successfully created.' }
-        format.json { render :show, status: :created, location: @team }
       else
         format.html { render :new }
-        format.json { render json: @team.errors, status: :unprocessable_entity }
       end
     end
   end
 
   # PATCH/PUT /teams/1
-  # PATCH/PUT /teams/1.json
   def update
     respond_to do |format|
       if @team.update(team_params)
         format.html { redirect_to @team, notice: 'Team was successfully updated.' }
-        format.json { render :show, status: :ok, location: @team }
       else
         format.html { render :edit }
-        format.json { render json: @team.errors, status: :unprocessable_entity }
       end
     end
   end
 
   # DELETE /teams/1
-  # DELETE /teams/1.json
   def destroy
     @team.destroy
     respond_to do |format|
       format.html { redirect_to teams_url, notice: 'Team was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 
@@ -76,7 +66,7 @@ class TeamsController < ApplicationController
   end
 
   def user_not_authorized
-    flash[:alert] = "You are not authorized to perform this action."
+    flash[:alert] = 'You are not authorized to perform this action.'
     redirect_to(teams_url)
   end
 end
