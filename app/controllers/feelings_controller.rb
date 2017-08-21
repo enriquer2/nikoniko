@@ -5,7 +5,7 @@ class FeelingsController < ApplicationController
   # GET /feelings.json
   def index
     @feelings = Feeling.all
-    authorize @users
+    authorize @feelings
   end
 
   # GET /feelings/1
@@ -15,7 +15,7 @@ class FeelingsController < ApplicationController
   # GET /feelings/new
   def new
     @feeling = Feeling.new
-    authorize @users
+    authorize @feeling
   end
 
   # GET /feelings/1/edit
@@ -25,7 +25,7 @@ class FeelingsController < ApplicationController
   # POST /feelings.json
   def create
     @feeling = Feeling.new(feeling_params)
-    authorize @users
+    authorize @feeling
 
     respond_to do |format|
       if @feeling.save
@@ -67,7 +67,7 @@ class FeelingsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_feeling
     @feeling = Feeling.find(params[:id])
-    authorize @users
+    authorize @feeling
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
