@@ -36,12 +36,12 @@ RSpec.describe TeamPolicy do
   end
 
   shared_examples 'user team not authorized' do
-    it { is_expected.not_to permit_action(:index) }
-    it { is_expected.not_to permit_action(:show) }
+    it { is_expected.to permit_action(:index) } #dejamos esto como permit porque luego nosotros le redirigimos
+    it { is_expected.to permit_action(:show) }
     it { is_expected.not_to permit_action(:create) }
     it { is_expected.not_to permit_action(:new) }
-    it { is_expected.not_to permit_action(:update) }
-    it { is_expected.not_to permit_action(:edit) }
+    it { is_expected.to permit_action(:update) }
+    it { is_expected.to permit_action(:edit) }
     it { is_expected.not_to permit_action(:destroy) }
   end
 
