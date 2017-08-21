@@ -74,4 +74,9 @@ class TeamsController < ApplicationController
   def team_params
     params.require(:team).permit(:name, :user_id)
   end
+
+  def user_not_authorized
+    flash[:alert] = "You are not authorized to perform this action."
+    redirect_to(teams_url)
+  end
 end
