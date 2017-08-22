@@ -4,20 +4,20 @@ class FeelingPolicy < ApplicationPolicy
       if user.admin? || user.boss?
         scope.all
       else # permisos de teamleader y employee iguales
-        scope.where(id: user.team_id)
+        scope.where(id: user.id)
       end
     end
   end
   def index?
-    user.admin? || user.boss? || user.teamleader? || user.employee?
+    true
   end
 
   def show?
-    user.admin? || user.boss? || user.teamleader? || user.employee?
+    true
   end
 
   def create?
-    user.admin? || user.boss? || user.teamleader? || user.employee?
+    true
   end
 
   def new?
@@ -25,7 +25,7 @@ class FeelingPolicy < ApplicationPolicy
   end
 
   def update?
-    user.admin? || user.boss? || user.teamleader? || user.employee?
+    true
   end
 
   def edit?
@@ -33,6 +33,6 @@ class FeelingPolicy < ApplicationPolicy
   end
 
   def destroy?
-    user.admin? || user.boss? || user.teamleader? || user.employee?
+    true
   end
 end
