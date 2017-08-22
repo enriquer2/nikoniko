@@ -40,12 +40,12 @@ RSpec.describe TeamsController, type: :controller do
 
     describe 'POST #create' do
       context 'with valid params' do
-        it 'creates a new user' do
+        it 'creates a new team' do
           expect do
             post :create, params: { team: valid_attributes }
           end.to change(Team, :count).by(1)
         end
-        it 'redirects to the created user' do
+        it 'redirects to the created team' do
           post :create, params: { team: valid_attributes }
           expect(response).to redirect_to(Team.last)
         end
@@ -61,11 +61,11 @@ RSpec.describe TeamsController, type: :controller do
 
     describe 'PUT #update' do
       context 'with valid params' do
-        it 'updates the requested user' do
+        it 'updates the requested team' do
           put :update, params: { id: team.to_param, team: valid_attributes }
           team.reload
         end
-        it 'redirects to the user' do
+        it 'redirects to the team' do
           put :update, params: { id: team.to_param, team: valid_attributes }
           expect(response).to redirect_to(team)
         end
