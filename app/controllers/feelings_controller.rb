@@ -3,7 +3,7 @@ class FeelingsController < ApplicationController
 
   # GET /feelings
   def index
-    @feelings = Feeling.all
+    @feelings = policy_scope(Feeling)
     authorize @feelings
   end
 
