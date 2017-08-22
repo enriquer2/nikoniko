@@ -6,9 +6,9 @@ RSpec.describe FeelingPolicy do
   let(:feeling3) { create(:f_teamleader) }
   let(:feeling4) { create(:f_employee) }
   let(:teamleader) { create(:teamleader) }
-  let(:feeling_teamleader) {create(:feeling, user: teamleader)}
+  let(:feeling_teamleader) { create(:feeling, user: teamleader) }
   let(:employee) { create(:employee) }
-  let(:feeling_employee) {create(:feeling, user: employee)}
+  let(:feeling_employee) { create(:feeling, user: employee) }
 
   shared_examples 'user fully authorized' do
     it { is_expected.to permit_action(:index) }

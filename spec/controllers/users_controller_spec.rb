@@ -86,7 +86,6 @@ RSpec.describe UsersController, type: :controller do
         end.to change(User, :count).by(-1)
       end
       it 'redirects to the users list' do
-        @user
         delete :destroy, params: { id: @user.to_param }
         expect(response).to redirect_to(users_url)
       end
