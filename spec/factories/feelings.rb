@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :feeling do
-    status { Feeling.statuses.values.sample }
+    status { Feeling.statuses.keys.sample }
     day { Faker::Date.between(3.days.ago, Date.today) }
 
     factory :f_admin, class: Feeling do
