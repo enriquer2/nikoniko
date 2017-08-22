@@ -2,7 +2,7 @@ FactoryGirl.define do
   factory :user do
     name { Faker::Name.last_name }
     lastname { Faker::Name.name }
-    email { "#{name}@gmail.com".downcase }
+    email { "#{name}.@gmail.com".downcase }
     password { Faker::Internet.password }
     team_id { Team.first.id } # This line is for test user_policy_spec
 
