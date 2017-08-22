@@ -3,8 +3,8 @@ class UserPolicy < ApplicationPolicy
     def resolve
       if user.admin? || user.boss?
         scope.all
-      elsif user.teamleader?
-        scope.where(role: user.team)
+      else
+        scope.where(team: user.team)
       end
     end
   end
