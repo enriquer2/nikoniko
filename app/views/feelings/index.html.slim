@@ -16,7 +16,7 @@ table
       tr
         td = feeling.day
         td = feeling.status
-        td = feeling.user
+        td = feeling.user_id
         td = link_to 'Show', feeling
         td = link_to 'Edit', edit_feeling_path(feeling)
         td = link_to 'Destroy', feeling, method: :delete, data: { confirm: 'Are you sure?' }
