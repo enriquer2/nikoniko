@@ -1,9 +1,9 @@
 class Feeling < ApplicationRecord
-  HEAVEN = 5
-  SATISFIED = 4
-  FRUSTRATED = 3
-  UPSET = 2
   PURGATORY = 1
+  UPSET = 2
+  FRUSTRATED = 3
+  SATISFIED = 4
+  HEAVEN = 5
   belongs_to :user
 
   validates :day, presence: true
