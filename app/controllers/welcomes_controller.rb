@@ -1,4 +1,4 @@
-class WelcomeController < ApplicationController
+class WelcomesController < ApplicationController
 
   # GET /welcome
   def index; end
