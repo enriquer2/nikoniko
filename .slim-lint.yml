@@ -1,0 +1,7 @@
+include:
+  - 'app/views/**/*.slim'
+
+linters:
+  LineLength:
+    include: 'app/**/*.slim'
+    max: 120
