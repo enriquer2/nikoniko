@@ -5,7 +5,7 @@
     <%= f.input :name %>
     <%= f.input :lastname %>
     <%= f.input :email %>
-    <%= f.input :role %>
+    <%= f.input :role, collection: User.roles, selected: 3 %>
   </div>
 
   <div class="form-actions">

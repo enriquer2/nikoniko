@@ -3,7 +3,7 @@
 
   <div class="form-inputs">
     <%= f.input :day %>
-    <%= f.input :status %>
+    <%= f.input :status, collection: Feeling.statuses.keys, selected: 4 %>
     <%= f.association :user %>
   </div>
 
