@@ -3,9 +3,9 @@ h2 Sign up with slim
 = simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
   = f.error_notification
 
-  if resource.errors.any?
-    resource.errors.full_messages.each do |message|
-      = message
+  - if resource.errors.any?
+    - resource.errors.full_messages.each do |message|
+      = "#{message} and "
 
   .form-inputs
     = f.input :name, required: true
@@ -15,6 +15,6 @@ h2 Sign up with slim
     = f.input :password_confirmation, required: true
 
   .form-actions
-    = f.button :submit, "Sign up"
+    = f.button :submit, 'Sign up'
 
-= render "devise/shared/links"
+= render 'devise/shared/links'
