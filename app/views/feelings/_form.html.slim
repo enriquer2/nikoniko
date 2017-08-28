@@ -1,0 +1,10 @@
+= simple_form_for(@feeling) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :day
+    = f.input :status, collection: Feeling.statuses.keys, selected: 4
+    = f.association :user
+
+  .form-actions
+    = f.button :submit
