@@ -70,7 +70,7 @@ RSpec.describe UsersController, type: :controller do
         end
       end
 
-      context'with invalid params' do
+      context 'with invalid params' do
         it 'returns a success response' do
           put :update, params: { id: @user.to_param, user: invalid_attributes }
           expect(response).to be_success
@@ -150,7 +150,7 @@ RSpec.describe UsersController, type: :controller do
         end
       end
 
-      context'with invalid params' do
+      context 'with invalid params' do
         it 'returns a success response' do
           put :update, params: { id: @user.to_param, user: invalid_attributes }
           expect(response).to be_success

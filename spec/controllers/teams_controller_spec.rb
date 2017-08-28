@@ -71,7 +71,7 @@ RSpec.describe TeamsController, type: :controller do
         end
       end
 
-      context'with invalid params' do
+      context 'with invalid params' do
         it 'returns a success response' do
           put :update, params: { id: team.to_param, team: invalid_attributes }
           expect(response).to be_success
@@ -151,7 +151,7 @@ RSpec.describe TeamsController, type: :controller do
         end
       end
 
-      context'with invalid params' do
+      context 'with invalid params' do
         it 'returns a success response' do
           put :update, params: { id: team.to_param, team: invalid_attributes }
           expect(response).to be_success
