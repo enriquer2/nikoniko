@@ -7,6 +7,10 @@ p
   strong Name:
   = @team.name
 
+p
+  strong User:
+  = @team.user_id
+
 = link_to 'Edit ', edit_team_path(@team)
 | |
 = link_to ' Back', teams_path
