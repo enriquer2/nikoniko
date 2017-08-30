@@ -20,36 +20,6 @@ RSpec.describe FeelingPolicy do
     it { is_expected.to permit_action(:destroy) }
   end
 
-  shared_examples 'user boss authorized' do
-    it { is_expected.to permit_action(:index) }
-    it { is_expected.to permit_action(:show) }
-    it { is_expected.to permit_action(:create) }
-    it { is_expected.to permit_action(:new) }
-    it { is_expected.to permit_action(:update) }
-    it { is_expected.to permit_action(:edit) }
-    it { is_expected.to permit_action(:destroy) }
-  end
-
-  shared_examples 'user teamleader authorized' do
-    it { is_expected.to permit_action(:index) }
-    it { is_expected.to permit_action(:show) }
-    it { is_expected.to permit_action(:create) }
-    it { is_expected.to permit_action(:new) }
-    it { is_expected.to permit_action(:update) }
-    it { is_expected.to permit_action(:edit) }
-    it { is_expected.to permit_action(:destroy) }
-  end
-
-  shared_examples 'user employee authorized' do
-    it { is_expected.to permit_action(:index) }
-    it { is_expected.to permit_action(:show) }
-    it { is_expected.to permit_action(:create) }
-    it { is_expected.to permit_action(:new) }
-    it { is_expected.to permit_action(:update) }
-    it { is_expected.to permit_action(:edit) }
-    it { is_expected.to permit_action(:destroy) }
-  end
-
   context 'with user admin' do
     subject { described_class.new(create(:admin), feeling1) } # que puede hacer quien sobre que
 
@@ -58,16 +28,16 @@ RSpec.describe FeelingPolicy do
   context 'with user boss' do
     subject { described_class.new(create(:boss), feeling2) }
 
-    it_behaves_like 'user boss authorized'
+    it_behaves_like 'user fully authorized'
   end
   context 'with user teamleader' do
     subject { described_class.new(teamleader, feeling3) }
 
-    it_behaves_like 'user teamleader authorized'
+    it_behaves_like 'user fully authorized'
   end
   context 'with user employee' do
     subject { described_class.new(employee, feeling4) }
 
-    it_behaves_like 'user employee authorized'
+    it_behaves_like 'user fully authorized'
   end
 end

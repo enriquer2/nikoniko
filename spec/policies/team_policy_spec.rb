@@ -16,16 +16,6 @@ RSpec.describe TeamPolicy do
     it { is_expected.to permit_action(:destroy) }
   end
 
-  shared_examples 'user boss authorized' do
-    it { is_expected.to permit_action(:index) }
-    it { is_expected.to permit_action(:show) }
-    it { is_expected.to permit_action(:create) }
-    it { is_expected.to permit_action(:new) }
-    it { is_expected.to permit_action(:update) }
-    it { is_expected.to permit_action(:edit) }
-    it { is_expected.to permit_action(:destroy) }
-  end
-
   shared_examples 'user team authorized' do
     it { is_expected.to permit_action(:index) }
     it { is_expected.to permit_action(:show) }
@@ -54,7 +44,7 @@ RSpec.describe TeamPolicy do
   context 'with user boss' do
     subject { described_class.new(create(:boss), team1) }
 
-    it_behaves_like 'user boss authorized'
+    it_behaves_like 'user fully authorized'
   end
   context 'with user teamleader over his team' do
     subject { described_class.new(create(:teamleader, team: team1), team1) }
