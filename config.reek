@@ -1,0 +1,21 @@
+TooManyStatements:
+  max_statements: 13
+exclude_paths:
+  - db
+  - lib
+  - helpers
+  - inputs
+  - validators
+InstanceVariableAssumption:
+ enabled: false
+IrresponsibleModule:
+ enabled: false
+UncommunicativeVariableName:
+  enabled: false
+UncommunicativeMethodName:
+   accept:
+    - !ruby/regexp /error/
+PrimaDonnaMethod:
+  enabled: false
+TooManyConstants:
+  max_constants: 10
