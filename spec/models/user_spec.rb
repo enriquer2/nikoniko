@@ -5,8 +5,8 @@ RSpec.describe User, type: :model do
 end
 
 describe User do
-  it 'Should have role 3 as default' do
+  it 'Should have role employee as default' do
     user = User.new
-    expect(user.role).to eq(3)
+    expect(user.role).to eq('employee')
   end
 end
