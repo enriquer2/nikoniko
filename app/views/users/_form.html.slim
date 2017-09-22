@@ -7,7 +7,7 @@
     = f.input :email
     = f.input :role, collection: User.roles.keys, selected: 3
     = f.input :password
-    = f.input :avatar
+    = f.input :avatar, as: :file
 
   .form-actions
     = f.button :submit
