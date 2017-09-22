@@ -1,5 +1,7 @@
 <p id="notice"><%= notice %></p>
 
+<h1>Feeling</h1>
+
 <p>
   <strong>Day:</strong>
   <%= @feeling.day %>
@@ -12,7 +14,7 @@
 
 <p>
   <strong>User:</strong>
-  <%= @feeling.user %>
+  <%= @feeling.user_id %>
 </p>
 
 <%= link_to 'Edit', edit_feeling_path(@feeling) %> |

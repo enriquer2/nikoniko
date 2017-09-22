@@ -10,6 +10,7 @@ gem 'pundit'
 gem 'rails', '~> 5.1.1'
 gem 'sass-rails', '~> 5.0'
 gem 'simple_form'
+gem 'slim'
 gem 'turbolinks', '~> 5'
 gem 'uglifier', '>= 1.3.0'
 
@@ -26,10 +27,11 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'rspec-rails'
-  gem 'rubocop', '~> 0.48.1', require: false
+  gem 'rubocop', require: false
   gem 'rubocop-rspec'
   gem 'rubycritic', require: false
   gem 'shoulda-matchers', git: 'https://github.com/thoughtbot/shoulda-matchers.git', branch: 'rails-5'
+  gem 'slim_lint'
 end
 
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]

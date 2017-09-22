@@ -1,0 +1,20 @@
+p id="notice"
+  = notice
+
+h1 Feeling with slim
+
+p
+  strong Day:
+  = @feeling.day
+
+p
+  strong Status:
+  = @feeling.status
+
+p
+  strong User:
+  = @feeling.user_id
+
+= link_to 'Edit ', edit_feeling_path(@feeling)
+| |
+= link_to ' Back', feelings_path

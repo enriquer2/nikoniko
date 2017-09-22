@@ -1,0 +1,28 @@
+p id="notice"
+  = notice
+
+h1 Users with slim
+
+table
+  thead
+    tr
+      th Name
+      th Lastname
+      th Email
+      th Role
+      th colspan="3"
+
+  tbody
+    - @users.each do |user|
+      tr
+        td = user.name
+        td = user.lastname
+        td = user.email
+        td = user.role
+        td = link_to 'Show', user
+        td = link_to 'Edit', edit_user_path(user)
+        td = link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' }
+
+br
+- if user_signed_in?
+  = link_to 'New User', new_user_path

@@ -1,0 +1,12 @@
+= simple_form_for(@user) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :name
+    = f.input :lastname
+    = f.input :email
+    = f.input :role, collection: User.roles.keys, selected: 3
+    = f.input :password
+
+  .form-actions
+    = f.button :submit
