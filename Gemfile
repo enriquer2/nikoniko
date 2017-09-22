@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'carrierwave', '~> 1.0'
 gem 'coffee-rails', '~> 4.2'
 gem 'devise'
 gem 'gemrat'
