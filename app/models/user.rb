@@ -3,6 +3,7 @@ class User < ApplicationRecord
   BOSS = 1
   TEAMLEADER = 2
   EMPLOYEE = 3
+  mount_uploader :avatar, AvatarUploader
   belongs_to :team, optional: true
   has_many :feelings, dependent: :destroy
   after_initialize :set_default_value
